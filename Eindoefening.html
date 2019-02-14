@@ -9,28 +9,63 @@
 <body>
     <p>
         <h1>Title</h1>
-        <input type="text">
+        <input type="text" id="titel">
     </p>
     <p>
         <h1>Todo</h1>
-        <textarea name="" id="todolist" cols="30" rows="10"></textarea>
+        <textarea name="" id="todo" cols="30" rows="10"></textarea>
     </p>
-    <button>Toevoegen</button>
-    <div class="result"></div>
+    <button onclick="addItem()">Toevoegen</button>
+    <ul class="result"></ul>
     <script>
-        var textarea = document.querySelector("#todolist")
+        
+        var titel = document.querySelector("#titel")
+        var todo = document.querySelector("#todo")
         var result = document.querySelector(".result");
-        var html= "";
+        var html;
         var todolist = [{titel: "patatten schillen",
-                        todo: "patatten nemen en mesje uithalen"}, 
+                        todo: "patatten nemen en mesje uithalen"},
                         {titel: "vuilbakken buitenzetten",
                         todo: "Groene vuilbak buiten zetten"} ];
 
-        for (var i = 0; i < todolist.length; i++) {
-            html += "<li>taak " + i + ": " + "<b>" + todolist[i].titel + "</b> " + todolist[i].todo + "</li>";  
+        function listToHTML() {
+            html= "";
+            for (var i = 0; i < todolist.length; i++) {
+                html += "<li>taak " + i + ": " + "<b>" + todolist[i].titel + "</b> " + todolist[i].todo + "</li>";
+                console.log(html); 
+            }
+            
+            result.innerHTML = html;
         }
-        console.log(html);
-        result.innerHTML = html;
+        //console.log(html);
+
+        function addItem() {
+            var todoitem = {
+                titel: titel.value,
+                todo: todo.value}
+
+            todolist.push(todoitem);
+
+            listToHTML()
+        }
+
+        listToHTML();
     </script>
+
+    <style>
+        ul {
+            /*width: 200px;*/
+            vertical-align: bottom;
+        }
+        li { 
+            width: 200px;
+            background-color: lightgrey;
+            display: inline-block;
+            margin: 10px;
+        }
+        b {
+            display: block;
+        }
+    </style>
 </body>
 </html>
