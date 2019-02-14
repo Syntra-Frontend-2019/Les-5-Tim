@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Eindoefening Les 5</title>
+</head>
+<body>
+    <p>
+        <h1>Title</h1>
+        <input type="text">
+    </p>
+    <p>
+        <h1>Todo</h1>
+        <textarea name="" id="todolist" cols="30" rows="10"></textarea>
+    </p>
+    <button>Toevoegen</button>
+    <div class="result"></div>
+    <script>
+        var textarea = document.querySelector("#todolist")
+        var result = document.querySelector(".result");
+        var html= "";
+        var todolist = [{titel: "patatten schillen",
+                        todo: "patatten nemen en mesje uithalen"}, 
+                        {titel: "vuilbakken buitenzetten",
+                        todo: "Groene vuilbak buiten zetten"} ];
+
+        for (var i = 0; i < todolist.length; i++) {
+            html += "<li>taak " + i + ": " + "<b>" + todolist[i].titel + "</b> " + todolist[i].todo + "</li>";  
+        }
+        console.log(html);
+        result.innerHTML = html;
+    </script>
+</body>
+</html>
