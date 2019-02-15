@@ -5,34 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Eindoefening Les 5</title>
-</head>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!--<script src="js/code.js"></script>-->
+    </head>
 <body>
-    <p>
-        <h1>Title</h1>
-        <input type="text" id="titel">
-    </p>
-    <p>
-        <h1>Todo</h1>
-        <textarea name="" id="todo" cols="30" rows="10"></textarea>
-    </p>
-    <button onclick="addItem()">Toevoegen</button>
-    <ul class="result"></ul>
+    <div class="header">To-Do App</div>
+    <main class="container">
+        <h1>Add a To-Do</h1>
+        <div class="form">
+        <p>
+            <h2>Title</h2>
+            <input type="text" id="titel">
+        </p>
+        <p>
+            <h2>Todo</h2>
+            <textarea name="" id="todo" cols="30" rows="10"></textarea>
+        </p>
+        <button onclick="addItem()">Toevoegen</button>
+        </div>
+    </main>
+    <section class="list">
+        <ul class="result"></ul>
+    </section>
     <script>
-        
         var titel = document.querySelector("#titel")
         var todo = document.querySelector("#todo")
         var result = document.querySelector(".result");
+        var checkbox;
         var html;
         var todolist = [{titel: "patatten schillen",
                         todo: "patatten nemen en mesje uithalen"},
                         {titel: "vuilbakken buitenzetten",
-                        todo: "Groene vuilbak buiten zetten"} ];
+                        todo: "Groene vuilbak buiten zetten"},
+                        {titel: "Lorem, ipsum.",
+                        todo: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque dolore delectus architecto esse illum praesentium, suscipit recusandae sed libero a!"} ];
 
         function listToHTML() {
             html= "";
             for (var i = 0; i < todolist.length; i++) {
-                html += "<li>taak " + i + ": " + "<b>" + todolist[i].titel + "</b> " + todolist[i].todo + "</li>";
-                console.log(html); 
+                html += "<li><input type='checkbox' id='checkbox" + i + "' onclick='checkBox(event)'>taak " + i + ": " + 
+                    "<span id='todotitle" + i + "'><b>" + todolist[i].titel + "</b></span> " + 
+                    todolist[i].todo + 
+                    "</li>";
+                //console.log(html); 
             }
             
             result.innerHTML = html;
@@ -49,23 +65,26 @@
             listToHTML()
         }
 
+        function checkBox(e) {
+            //alert(e.target.id);
+            id = e.target.id;
+            lastchar = id[id.length -1];
+            var currentTitle = document.querySelector("#todotitle" + lastchar);
+            if (e.target.checked === true) {
+                //currentTitle.style.text-decoration = "line-trough";
+                currentTitle.setAttribute("style", "text-decoration: line-through")
+                console.log(currentTitle);
+            }
+            else {
+                currentTitle.setAttribute("style", "text-decoration: none")
+                console.log(currentTitle);
+            }
+            /*checkbox = document.querySelector("#checkbox2");
+            console.log(checkbox.checked)*/
+        }
         listToHTML();
+
     </script>
 
-    <style>
-        ul {
-            /*width: 200px;*/
-            vertical-align: bottom;
-        }
-        li { 
-            width: 200px;
-            background-color: lightgrey;
-            display: inline-block;
-            margin: 10px;
-        }
-        b {
-            display: block;
-        }
-    </style>
 </body>
 </html>
